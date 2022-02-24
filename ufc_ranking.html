@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>UFC</title>
+    <style>
+      .UFC_Search , .input{
+        text-align:center;
+      }
+
+
+      #search_1 {
+        background-color:#fff;
+        border-radius: 25px 0 0 25px;
+        width : 340px;
+        height : 30px;
+      }
+
+      .search_2 {
+        background-color:Orange;
+        padding:9px
+      }
+
+      .profile {
+        text-align:center;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1 class = "UFC_Search">UFC 선수 정보 검색</h1>
+    <div class = "input">
+      <input type = "input" id = "search_1" placeholder="선수 이름을 입력해주세요 :)">
+      <input type = "button" value = "Seach" class = "search_2" onclick="search()">
+    </div>
+    <div class = "profile">
+      <span id = "name"></span>
+      <span id = "win"></span>
+      <span id = "lose"></span>
+      <span id = "birth"></span>
+      <span id = "reach"></span>
+      <span id = "height"></span>
+      <span id = "weight"></span>
+      <span id = "submission"></span>
+      <span id = "titlewins"></span>
+    </div>
+  </body>
+</html>
+
+<script src="ufc_ranking.json" type="text/javascript"></script>
+<script type="text/javascript">
+
+  let mydata = JSON.parse(JSON.stringify(data));
+  console.log(mydata)
+
+  function search()
+  {
+    var i;
+    name = document.getElementById('search_1').value
+    for (i = 0;i < 1369;i++)
+    {
+      if (mydata[i]['LastName'] === name || mydata[i]['FirstName'] == name)
+      {
+        console.log("제대로 작동 !!");
+        document.querySelector("#name").innerHTML = "NAME : " + mydata[i]['FirstName'] + ' ' + mydata[i]['LastName'] + '<br>'
+        document.querySelector("#win").innerHTML = "WIN : " + mydata[i]['Wins'] + '<br>'
+        document.querySelector("#lose").innerHTML = "LOSE : " + mydata[i]['Losses'] + '<br>'
+        document.querySelector("#reach").innerHTML = "REACH : " + mydata[i]['Reach'] + '<br>'
+        document.querySelector("#birth").innerHTML = "BIRTH : " + mydata[i]['BirthDate'] + '<br>'
+        document.querySelector("#height").innerHTML = "HEIGHT : " + mydata[i]['Height'] + '<br>'
+        document.querySelector("#weight").innerHTML = "WEIGHT : " + mydata[i]['Weight'] + '<br>'
+        document.querySelector("#submission").innerHTML = "SUBMISSION : " + mydata[i]['Submissions'] + '<br>'
+        document.querySelector("#titlewins").innerHTML = "TITLE WIN : " + mydata[i]['TitleWins'] + '<br>'
+        break
+      }
+      else
+      {
+        if (i == 1368)
+          console.log("해당 정보가 없습니다");
+      }
+    }
+  }
+</script>
